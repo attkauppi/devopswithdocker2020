@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+  wordpress:
+    image: wordpress
+    ports:
+      - "8080:80"
+
+  mysql:
+    image: mysql
+    volumes:
+       - db-data:/var/lib/mysql/data
+
+volumes:
+  db-data:
+
+
+
+version: '3'
+
+services:
+  backend:
+    build: ./backend-example-docker
+  expose:
+    - "8000:8000"
+  environment:
+    - API_HOST: "${API_HOST}"
+    - BACKEND_SERVER_PORT: ${BACKEND_PORT}
+  ports:
+    - ${BACKEND_PORT}:${BACKEND_PORT}
+  volumes:
+    - .backend-example-docker:/mydir/backend-example-docker
+  command:
+    - npm start
+
+  frontend:
+    build: ./frontend-example-docker
+    environment:
+      - FRONTEND_PORT=${FRONTEND_PORT}
+    expose:
+      - "5000:5000"
+    ports:
+      - ${FRONTEND_PORT}:${FRONTEND_PORT}
+    volumes:
+      - ./frontend-example-docker:/mydir/frontend-example-docker
+    links:
+      - backend
+    command: serve -s -l 5000 dist
+    
+
+
+
