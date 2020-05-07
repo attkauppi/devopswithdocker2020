@@ -1,0 +1,4 @@
+docker run --name ports -p 8787:80 devopsdockeruh/ports_exercise
+
+Text on the web page:
+"Ports configured correctly!!"
