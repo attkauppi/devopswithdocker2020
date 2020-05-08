@@ -25,7 +25,7 @@ docker run --rm -p 8080:8080 spring
 
 ### 1.14
 
-[Dockerfile](1.14/Dockerfile)
+[Dockerfile](part1/1.14/Dockerfile)
 
 When building the container, I received loads of error messages and the build wouldn't even finish. The main error message was:
 
