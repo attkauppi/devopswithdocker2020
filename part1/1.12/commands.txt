@@ -1,0 +1,5 @@
+Commands used to run:
+
+backend: docker run -p 8000:8000 backend_server
+
+frontend: docker run -p 5000:5000 frontend_server

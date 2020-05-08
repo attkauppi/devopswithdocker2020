@@ -1,0 +1,31 @@
+FROM ubuntu:16.04
+
+WORKDIR /mydir
+COPY . .
+
+RUN apt-get update && apt-get install -y curl
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
+RUN apt-get -y install nodejs
+
+RUN node -v && npm -v
+#RUN npm run build
+#RUN npm install -g serve
+
+ENV API_URL=http://localhost:8000
+RUN npm install
+
+EXPOSE 5000
+
+ENTRYPOINT npm start
+
+
+
+
+#EXPOSE 8888
+
+#ENTRYPOINT ["/usr/bin/serve"]
+#ENTRYPOINT ["API_URL=http://localhost:8888", "/usr/bin/npm"]
+#ENTRYPOINT ["/usr/bin/npm"]
+#ENTRYPOINT npm start
+#CMD ["start"]
+#CMD ["-s", "-l", "5000", "dist"]
