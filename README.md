@@ -58,3 +58,17 @@ To run the server, use the following command:
 docker run -p 5000:5000 tag_name/container_id
 ```
 
+### 1.16
+
+The Heroku app is running [here](https://dockerdevops-herokuexample.herokuapp.com/).
+
+In addition to creating a new app on Heroku, it was deployed with the following commands:
+
+```
+$ docker pull devopsdockeruh/heroku-example
+$ docker tag devopsdockeruh/heroku-example registry.heroku.com/dockerdevops-herok$
+$ heroku login
+$ heroku container:login
+$ docker push registry.heroku.com/dockerdevops-herokuexample/web
+$ heroku container:release web --app dockerdevops-herokuexample
+```
