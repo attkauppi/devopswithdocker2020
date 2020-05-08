@@ -43,3 +43,18 @@ Run:
 ```
 docker run --rm -p 3000:3000 rails
 ```
+
+### 1.15
+
+[Dockerfile](part1/1.15/Dockerfile)
+
+Dockerhub project available [here](https://hub.docker.com/repository/docker/arikaupp/flask_server).
+
+This is a very minimal flask server running inside a docker container using a python 3.7 image. By default, flask uses port 5000.
+
+To run the server, use the following command:
+
+```
+docker run -p 5000:5000 tag_name/container_id
+```
+
