@@ -3,3 +3,6 @@ backend-example-docker
 spring-example-project
 .env
 scaling-exercise
+ml-kurkkumopo-backend
+ml-kurkkumopo-frontend
+ml-kurkkumopo-training
