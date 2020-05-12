@@ -115,5 +115,7 @@ Not sure, if I was meant to do something else as well, but that seemed to be eno
 
 [docker-compose.yml](part2/2.5/docker-compose.yml)
 
+### 2.6
 
+[docker-compose.yml](part2/2.6/docker-compose.yml)
 
