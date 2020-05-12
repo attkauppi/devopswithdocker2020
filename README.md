@@ -76,6 +76,26 @@ $ heroku container:release web --app dockerdevops-herokuexample
 
 ## Part 2
 
+### 2.1
+
+[docker-compose.yml](part2/2.2/docker-compose.yml)
+
+Logs:
+
+```
+Mon, 11 May 2020 18:13:13 GMT
+Mon, 11 May 2020 18:13:16 GMT
+Mon, 11 May 2020 18:13:19 GMT
+Mon, 11 May 2020 18:13:22 GMT
+Secret message is:
+"Volume bind mount is easy"
+Mon, 11 May 2020 18:13:28 GMT
+Mon, 11 May 2020 18:13:31 GMT
+```
+
+### 2.2
+
+[docker-compose.yml](part2/2.3/docker-compose.yml)
 
 ### 2.3
 
