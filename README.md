@@ -76,6 +76,11 @@ $ heroku container:release web --app dockerdevops-herokuexample
 
 ## Part 2
 
+
+### 2.3
+
+[docker-compose.yml](part2/2.3/docker-compose.yml)
+
 ### 2.4
 
 The only command used - in addition to cloning the application from git - was:
