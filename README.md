@@ -85,3 +85,10 @@ docker-compose up -d --scale compute=3
 ```
 
 Not sure, if I was meant to do something else as well, but that seemed to be enough to get the button to turn green.
+
+### 2.5
+
+[docker-compose.yml](part2/2.5/docker-compose.yml)
+
+
+
