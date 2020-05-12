@@ -72,3 +72,16 @@ $ heroku container:login
 $ docker push registry.heroku.com/dockerdevops-herokuexample/web
 $ heroku container:release web --app dockerdevops-herokuexample
 ```
+
+
+## Part 2
+
+### 2.4
+
+The only command used - in addition to cloning the application from git - was:
+
+```
+docker-compose up -d --scale compute=3
+```
+
+Not sure, if I was meant to do something else as well, but that seemed to be enough to get the button to turn green.
