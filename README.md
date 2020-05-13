@@ -153,3 +153,117 @@ http {
 ### 2.9
 
 [docker-compose.yml](part2/2.9/docker-compose.yml)
+
+### 2.10
+
+I removed the environment variable API_URL's definition from frontend's Dockerfile and only defined it in docker-compose.yml, but modified it so it points straight to  http://localhost:80/api due to nginx being now in use.
+
+After that, everything seemed to work just fine.
+
+[Backend's dockerfile](part2/2.10/Dockerfile.backend): 
+
+```
+FROM ubuntu:16.04
+
+WORKDIR /mydir
+
+COPY . .
+
+RUN apt-get update && apt-get install -y curl
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
+RUN apt-get install -y nodejs
+
+ENV FRONT_URL=http://localhost:5000
+RUN npm install
+
+EXPOSE 8000
+
+ENTRYPOINT npm start
+```
+
+[Frontend's dockerfile](part2/2.10/Dockerfile.frontend):
+
+```
+FROM ubuntu:16.04
+
+WORKDIR /mydir
+COPY . .
+
+RUN apt-get update && apt-get install -y curl
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
+RUN apt-get -y install nodejs
+
+RUN node -v && npm -v
+
+# This was commented out in 2.10. API_URL is now defined in docker-compose.yml
+#ENV API_URL=http://localhost:8000
+RUN npm install
+
+EXPOSE 5000
+
+ENTRYPOINT npm start
+```
+
+[docker-compose.yml](part2/2.9/docker-compose.yml):
+
+```
+
+version: '3.5'
+
+services:
+    backend:
+        # Works either way, with a prebuilt image or by building the frontend here
+        #image: 'backend'
+        build:
+            ./backend-example-docker
+        environment:
+            - REDIS=redis
+            - DB_HOST=postgres
+            - DB_NAME=postgres
+            - DB_USERNAME=postgres
+            - DB_PASSWORD=example
+        depends_on: 
+            - postgres
+        volumes:
+            - ./logs.txt:/usr/app/logs.txt
+        container_name: backend
+        tty: true
+        command: npm start
+    
+    frontend:
+        # Works either way, with a prebuilt image or by building the frontend here
+        #image: 'frontend'
+        build:
+            ./frontend-example-docker
+        environment:
+            - API_URL=http://localhost:80/api
+        container_name: frontend
+        tty: true
+        command: npm start
+    
+    redis:
+        image: 'redis'
+
+    postgres:
+        image: postgres
+        restart: unless-stopped
+        environment:
+            POSTGRES_PASSWORD: example
+        volumes:
+            - ./database:/var/lib/postgresql/data
+
+    nginx:
+        image: nginx
+        environment:
+            - NGINX_HOST=localhost
+            - NGINX_PORT=80
+        ports:
+            - 80:80
+        container_name: nginx
+        depends_on:
+            - frontend
+            - backend
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf:ro
+        restart: always
+```

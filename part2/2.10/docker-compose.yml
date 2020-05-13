@@ -34,9 +34,6 @@ services:
     
     redis:
         image: 'redis'
-        #container_name: redis
-        #volumes:
-        #    - ./redis_data:/data
 
     postgres:
         image: postgres
