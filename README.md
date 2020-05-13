@@ -123,3 +123,29 @@ Not sure, if I was meant to do something else as well, but that seemed to be eno
 ### 2.7
 
 [docker-compose.yml](part2/2.7/docker-compose.yml)
+
+### 2.8
+
+[docker-compose.yml](part2/2.8/docker-compose.yml)
+
+[nginx.conf](part2/2.8/nginx.conf)
+
+Nginx configuration can be seen here as well:
+
+```
+events { worker_connections 1024; }
+
+http {
+    server {
+        listen 80;
+
+        location / {
+        proxy_pass http://frontend:5000/;
+        }
+
+        location /api/ {
+        proxy_pass http://backend:8000/;
+        }
+    }
+}
+```
