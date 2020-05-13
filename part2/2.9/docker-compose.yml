@@ -13,8 +13,6 @@ services:
             - DB_NAME=postgres
             - DB_USERNAME=postgres
             - DB_PASSWORD=example
-        ports:
-            - 8000:8000
         depends_on: 
             - postgres
         volumes:
@@ -29,17 +27,16 @@ services:
         #build:
         #    ./frontend-example-docker
         environment:
-            - API_URL=http://localhost:8000
-        ports:
-            - 5000:5000
+            - API_URL=http://localhost:80/api
         container_name: frontend
         tty: true
         command: npm start
     
     redis:
         image: 'redis'
-        volumes:
-            - ./redis_data:/data
+        container_name: redis
+        #volumes:
+        #    - ./redis_data:/data
 
     postgres:
         image: postgres
