@@ -267,3 +267,24 @@ services:
             - ./nginx.conf:/etc/nginx/nginx.conf:ro
         restart: always
 ```
+
+## Part 3
+
+### 3.1
+
+Results: 
+
+REPOSITORY                                           TAG                 IMAGE ID            CREATED             SIZE
+backend                                              latest              5cfd59638a84        8 minutes ago       308MB
+backend_old                                          latest              31af1ebf5e64        14 minutes ago      337MB
+frontend_old                                         latest              1b88702d89d0        26 minutes ago      516MB
+frontend                                             latest              46b483e93042        4 minutes ago       488MB
+
+Dockerfiles:
+
+* [old frontend Dockerfile](part3/3.1/Dockerfile.front_old)
+* [new frontend Dockerfile](part3/3.1/Dockerfile.front_new)
+* [old backend Dockerfile](part3/3.1/Dockerfile.backend_old)
+* [new backend Dockerfile](part3/3.1/Dockerfile.backend_new)
+
+Results also [here](part3/3.1/results.txt).
