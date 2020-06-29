@@ -294,7 +294,7 @@ Results also [here](part3/3.1/results.txt).
 
 Github repository is [here](https://github.com/attkauppi/flask_example/).
 
-[Flask application] runnin on heroku can be found [here](https://flaskexampledevops.herokuapp.com/).
+Flask application running on heroku can be found [here](https://flaskexampledevops.herokuapp.com/).
 
 Dockerfile looked like this:
 
