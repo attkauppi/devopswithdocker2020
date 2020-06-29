@@ -288,3 +288,9 @@ Dockerfiles:
 * [new backend Dockerfile](part3/3.1/Dockerfile.backend_new)
 
 Results also [here](part3/3.1/results.txt).
+
+### 3.2
+
+Github repository is [here](https://github.com/attkauppi/flask_example/).
+
+[Flask application] runnin on heroku can be found [here](https://flaskexampledevops.herokuapp.com/).
