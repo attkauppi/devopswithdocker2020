@@ -289,8 +289,36 @@ Dockerfiles:
 
 Results also [here](part3/3.1/results.txt).
 
-### 3.2
+### 3.2 - A simple flask application on heroku
+
 
 Github repository is [here](https://github.com/attkauppi/flask_example/).
 
 [Flask application] runnin on heroku can be found [here](https://flaskexampledevops.herokuapp.com/).
+
+Dockerfile looked like this:
+
+```
+FROM ubuntu:16.04
+
+WORKDIR /app
+
+COPY . .
+
+RUN apt-get update && apt-get install python3 python3-flask python3-gunicorn -y
+
+EXPOSE 5000:5000
+ENTRYPOINT python3 wsgi.py
+```
+
+And the config.yml for circleci looked like this:
+
+```
+version: 2.1
+orbs:
+  heroku: circleci/heroku@0.0.10
+workflows:
+  heroku_deploy:
+    jobs:
+      - heroku/deploy-via-git
+```
