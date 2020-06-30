@@ -299,16 +299,16 @@ Flask application running on heroku can be found [here](https://flaskexampledevo
 Dockerfile looked like this:
 
 ```
-FROM ubuntu:16.04
+FROM python:3.7-alpine
 
 WORKDIR /app
 
 COPY . .
 
-RUN apt-get update && apt-get install python3 python3-flask python3-gunicorn -y
+RUN pip install -U Flask gunicorn
 
 EXPOSE 5000:5000
-ENTRYPOINT python3 wsgi.py
+ENTRYPOINT python wsgi.py
 ```
 
 And the config.yml for circleci looked like this:
