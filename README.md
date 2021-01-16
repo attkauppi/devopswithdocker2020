@@ -339,3 +339,15 @@ You can find more documentation in the first link mentioned under this subheadin
 [Dockerfile for frontend](part3/3.4/Dockerfile.frontend_new)
 
 The users of both are non-root.
+
+### 3.5
+
+Original sizes:
+
+* Frontend](part3/3.5/Dockerfile.frontend: 493 MB
+* Backend: 299 MB
+
+Improved:
+
+* [Frontend](part3/3.5/Dockerfile.frontend): 301 MB
+* [Backend](part3/3.5/Dockerfile.backend): 124
