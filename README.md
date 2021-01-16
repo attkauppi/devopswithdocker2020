@@ -322,3 +322,20 @@ workflows:
     jobs:
       - heroku/deploy-via-git
 ```
+### 3.3 - simple build service
+
+Answer for exercise 3.3 and further documentation can be found [here](part3/3.3/3.3.md)
+
+The example project I used was the ruby project from part1, exercise 1.14 (link to github)[https://github.com/docker-hy/rails-example-project]. I cloned the project to my own github and used the Dockerfile I submitted as an answer to [exercise 1.14](part1/1.14/Dockerfile)
+
+You can find more documentation in the first link mentioned under this subheading.
+
+[Link to Dockerhub project created in the exercise](https://hub.docker.com/repository/docker/arikaupp/devopsrubyexample).
+
+### 3.4 - non-root users
+
+[Dockerfile for backend](part3/3.4/Dockerfile.backend_new)
+
+[Dockerfile for frontend](part3/3.4/Dockerfile.frontend_new)
+
+The users of both are non-root.

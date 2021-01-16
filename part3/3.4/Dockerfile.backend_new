@@ -1,0 +1,21 @@
+FROM ubuntu:16.04
+ENV FRONT_URL=http://localhost:5000
+EXPOSE 8000
+
+WORKDIR /backend-example-docker
+
+RUN apt-get update && apt-get install -y curl git && \
+    git clone https://github.com/docker-hy/backend-example-docker.git /backend-example-docker && \
+    ls -l && \
+    curl -sL https://deb.nodesource.com/setup_10.x | bash && \
+    apt-get install -y nodejs && \
+    apt-get purge -y --autoremove curl git && \
+    rm -rf /var/lib/apt/lists/* && \
+    npm install && \
+    useradd -m app && \
+    chown -R app /backend-example-docker && \
+    chmod -R u+x /backend-example-docker
+    
+USER app
+
+CMD npm start
