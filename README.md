@@ -6,8 +6,42 @@
 
 Exercises from [part 1](https://devopswithdocker.com/part1/)
 
+### Exercises in between, have been done and can be found in their respective folders.
+
+### [1.1](part1/1.1/1.1.md)
+
+### [1.2](part1/1.2/1.2.md)
+
+### [1.3](part1/1.3/1.3.md)
+
+### [1.4](part1/1.4/1.4.md)
+
+### [1.5](part1/1.5.md)
+
+### [1.6](part1/1.6/1.6.md)
+
+### [1.7](part1/1.7/1.7.md)
+
+### [1.8](part1/1.8/1.8.md)
+
+### [1.9](part1/1.9/1.9.md)
+
+### [1.10](part1/1.10/1.10.md)
+
+### [1.11](part1/1.11/1.11.md)
 
 ### 1.12
+
+Commands used to run:
+
+backend: docker run -p 8000:8000 backend_server
+
+frontend: docker run -p 5000:5000 frontend_server
+
+[Dockerfile.backend](/part1/1.12/Dockerfile.backend)
+[Dockerfile.frontend](/part1/1.12/Dockerfile.frontend)
+
+[.env](/part1/1.12/.env)
 
 ### 1.13
 
@@ -351,3 +385,77 @@ Improved:
 
 * [Frontend](part3/3.5/Dockerfile.frontend): 301 MB
 * [Backend](part3/3.5/Dockerfile.backend): 124
+
+### 3.6
+
+[Dockerfile][part3/3.6/Dockerfile]
+
+```
+FROM node:alpine as build-stage
+
+ENV API_URL=http://localhost:8000
+EXPOSE 5000
+
+WORKDIR /app
+
+RUN apk add git --no-cache && \
+    git clone https://github.com/docker-hy/frontend-example-docker.git /app && \
+    npm install && \
+    npm run build
+
+FROM nginx:alpine
+
+EXPOSE 80
+
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+### 3.7
+
+I used the spring project from part1 of the course (exercise 1.13, (github)[https://github.com/docker-hy/spring-example-project]).
+
+This is my [old Dockerfile](part3/3.7/Dockerfile.old):
+
+```
+FROM openjdk:8
+
+WORKDIR app
+
+EXPOSE 8080
+
+COPY ./spring-example-project/ .
+RUN ls -a
+RUN ./mvnw package
+
+CMD ["java", "-jar", "./target/docker-example-1.1.3.jar"]
+```
+It's size was 599 MB
+
+This is my [new Dockerfile](part3/3.7/Dockerfile)
+
+```
+FROM openjdk:8-jdk-alpine as build-stage
+
+WORKDIR app
+
+RUN apk add --no-cache git && \
+    git clone https://github.com/docker-hy/spring-example-project.git /app && \
+    ./mvnw package && \
+    ls -a && \
+    ls -a target && \
+    rm -rf /var/cache/apk/*
+
+FROM openjdk:8-jdk-alpine
+
+COPY --from=build-stage app/target/docker-example-1.1.3.jar .
+
+RUN adduser -D app && chown app docker-example-1.1.3.jar
+
+USER app
+EXPOSE 8080
+
+CMD java -jar ./docker-example-1.1.3.jar
+```
+It's size is 141 MB
